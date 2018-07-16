@@ -1,1 +1,1 @@
-# MohrsCircleVisualization
+# Mohr's Circle Visualization
