@@ -290,6 +290,46 @@ public class MohrCanvas1 extends Canvas implements Runnable{
                     }else{
                         bufferGraphics1.drawString("C = "+myMohr.getRndCohesion(),xC23-20,yC23+5);
                     }
+                    //*/===========================================================
+                    int height=this.getSize().height, width=this.getSize().width, distance=height/40;
+                    
+                    int space=distance/12;
+                    bufferGraphics2D.setStroke(new BasicStroke(0.2f));
+                    for(int px=0;px<=width;px+=distance){
+                        if(px%(10*distance)==0){
+                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics2D.setStroke(new BasicStroke(2));
+                            bufferGraphics1.drawLine(px,0,px,height);
+                        }else if(px%(5*distance)==0){
+                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics2D.setStroke(new BasicStroke(1));
+                            bufferGraphics1.drawLine(px,0,px,height);
+                        }else{
+                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics2D.setStroke(new BasicStroke(1));
+                            drawDashedLine(bufferGraphics1,px,0,px,height,space);
+                        }
+                        
+                    }
+                    for(int py=0;py<=height;py+=distance){
+                        if(py%(10*distance)==0){
+                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics2D.setStroke(new BasicStroke(2));
+                            bufferGraphics1.drawLine(0,py,width,py);
+                        }else if(py%(5*distance)==0){
+                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics2D.setStroke(new BasicStroke(1));
+                            bufferGraphics1.drawLine(0,py,width,py);
+                        }else{
+                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics2D.setStroke(new BasicStroke(1));
+                            drawDashedLine(bufferGraphics1,0,py,width,py,space);
+                        }
+                    }
+                    bufferGraphics1.setColor(new Color(255,255,255,255));
+                    bufferGraphics2D.setStroke(new BasicStroke(1));
+                    
+                    //*/////===========================================================
                     if(!failed){
                         bufferGraphics1.setColor(new Color(255,255,255,255));
                         bufferGraphics2D.setStroke(new BasicStroke(1));
@@ -303,7 +343,7 @@ public class MohrCanvas1 extends Canvas implements Runnable{
                         bufferGraphics1.drawString("A",xA+dx,yA+dy);
                         
                         
-                        
+                       
                         dx=(xB-xA)/20-labelSize/4;
                         dy=(yB-yA)/20+labelSize/4;
                         bufferGraphics1.drawString("B",xB+dx,yB+dy);
@@ -432,5 +472,20 @@ public class MohrCanvas1 extends Canvas implements Runnable{
     }
     public void setRunning(boolean a){
         running=a;
+    }
+    public void drawDashedLine(Graphics g,int x1,int y1,int x2,int y2,int space){
+        if(x1-x2==0){
+            int y;
+            int steps=0;
+            for(y=y1;y<this.getSize().height;y+=4*space){
+                g.drawLine(x1,y,x2,y+space);
+                steps++;
+            }
+        }
+        if(y1-y2==0){
+            for(int x=x1;x<this.getSize().width;x+=4*space){
+                g.drawLine(x,y1,x+space,y2);
+            }
+        }
     }
 }
