@@ -295,35 +295,38 @@ public class MohrCanvas1 extends Canvas implements Runnable{
                     
                     int space=distance/12;
                     bufferGraphics2D.setStroke(new BasicStroke(0.2f));
-                    for(int px=0;px<=width;px+=distance){
-                        if(px%(10*distance)==0){
-                            bufferGraphics1.setColor(new Color(255,255,255,127));
-                            bufferGraphics2D.setStroke(new BasicStroke(2));
-                            bufferGraphics1.drawLine(px,0,px,height);
-                        }else if(px%(5*distance)==0){
+                    for(int px=xZero;px<=width;px+=distance){
+                        if((px-xZero)%(10*distance)==0){
                             bufferGraphics1.setColor(new Color(255,255,255,127));
                             bufferGraphics2D.setStroke(new BasicStroke(1));
                             bufferGraphics1.drawLine(px,0,px,height);
+                        }else if((px-xZero)%(5*distance)==0){
+                            bufferGraphics1.setColor(new Color(255,255,255,63));
+                            bufferGraphics2D.setStroke(new BasicStroke(1));
+                            bufferGraphics1.drawLine(px,0,px,height);
                         }else{
-                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics1.setColor(new Color(255,255,255,63));
                             bufferGraphics2D.setStroke(new BasicStroke(1));
                             drawDashedLine(bufferGraphics1,px,0,px,height,space);
                         }
                         
                     }
-                    for(int py=0;py<=height;py+=distance){
+                    for(int py=0;py<height/2;py+=distance){
                         if(py%(10*distance)==0){
                             bufferGraphics1.setColor(new Color(255,255,255,127));
-                            bufferGraphics2D.setStroke(new BasicStroke(2));
-                            bufferGraphics1.drawLine(0,py,width,py);
+                            bufferGraphics2D.setStroke(new BasicStroke(1));
+                            bufferGraphics1.drawLine(xZero,yZero-py,width,yZero-py);
+                            bufferGraphics1.drawLine(xZero,yZero+py,width,yZero+py);
                         }else if(py%(5*distance)==0){
-                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics1.setColor(new Color(255,255,255,63));
                             bufferGraphics2D.setStroke(new BasicStroke(1));
-                            bufferGraphics1.drawLine(0,py,width,py);
+                            bufferGraphics1.drawLine(xZero,yZero-py,width,yZero-py);
+                            bufferGraphics1.drawLine(xZero,yZero+py,width,yZero+py);
                         }else{
-                            bufferGraphics1.setColor(new Color(255,255,255,127));
+                            bufferGraphics1.setColor(new Color(255,255,255,63));
                             bufferGraphics2D.setStroke(new BasicStroke(1));
-                            drawDashedLine(bufferGraphics1,0,py,width,py,space);
+                            drawDashedLine(bufferGraphics1,xZero,yZero-py,width,yZero-py,space);
+                            drawDashedLine(bufferGraphics1,xZero,yZero+py,width,yZero+py,space);
                         }
                     }
                     bufferGraphics1.setColor(new Color(255,255,255,255));
